@@ -167,7 +167,7 @@ export default function Home() {
 
   const handleDownloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/FAHMI_AHMED_GHAZAL_Resume.pdf';
+    link.href = '${import.meta.env.BASE_URL}FAHMI_AHMED_GHAZAL_Resume.pdf`;
     link.download = 'FAHMI_AHMED_GHAZAL_Resume.pdf';
     document.body.appendChild(link);
     link.click();
