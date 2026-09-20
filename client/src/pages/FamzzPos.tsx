@@ -30,7 +30,7 @@ export default function FamzzPos() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border">
         <div className="container py-5 flex items-center justify-between gap-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
+          <Link href={import.meta.env.BASE_URL} className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
             <ArrowLeft size={17} /> Back to portfolio
           </Link>
           <a href="https://github.com/Famz88/famzz-pos-downloads" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
@@ -88,10 +88,9 @@ export default function FamzzPos() {
       <footer className="border-t border-border py-8">
         <div className="container flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <span>FamZz POS · Independent project by Fahmi Ahmed Ghazal</span>
-          <Link href="/" className="text-accent hover:underline">Return to portfolio</Link>
+          <Link href={import.meta.env.BASE_URL} className="text-accent hover:underline">Return to portfolio</Link>
         </div>
       </footer>
     </div>
   );
 }
-

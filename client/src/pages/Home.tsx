@@ -405,7 +405,7 @@ export default function Home() {
                     <a href="https://famz88.github.io/famzz-pos-downloads/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
                       Live demo <ExternalLink size={14} />
                     </a>
-                    <Link href="/projects/famzz-pos" className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
+                    <Link href={`${import.meta.env.BASE_URL}projects/famzz-pos`} className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
                       Case study <ExternalLink size={14} />
                     </Link>
                     <a href="https://github.com/Famz88/famzz-pos-downloads" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
