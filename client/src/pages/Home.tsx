@@ -22,7 +22,7 @@ export default function Home() {
 
   const experiences = [
     {
-      title: 'IT Technician (IT Support & Network Administration)',
+      title: 'IT Technician — End User & IT Infrastructure Support',
       company: 'AMWAJ Group of Companies',
       location: 'Qatar',
       period: 'January 2023 – Present',
@@ -38,18 +38,6 @@ export default function Home() {
       ],
     },
     {
-      title: 'IT Helpdesk Specialist',
-      company: 'NCC Group Limited',
-      location: 'Abu Dhabi, UAE',
-      period: 'June 2017 – May 2022',
-      highlights: [
-        'Provided first-level support for 300+ users with a 95% first-call resolution rate',
-        'Administered Active Directory, including onboarding, offboarding, user access, and workstation deployment',
-        'Installed and configured workstations, peripherals, enterprise applications, and network connectivity',
-        'Maintained IT inventory, equipment lifecycle records, and user documentation',
-      ],
-    },
-    {
       title: 'Hardware Technician',
       company: 'AMWAJ Catering Services Company Limited',
       location: 'Qatar',
@@ -58,7 +46,6 @@ export default function Home() {
         'Diagnosed and repaired desktop, laptop, and peripheral hardware issues',
         'Installed operating systems and applications and performed preventive maintenance',
         'Assembled and configured computer systems to specification',
-        'Reduced average repair turnaround time by 40% through process improvements',
         'Managed hardware components and replacement-part inventory',
       ],
     },
@@ -68,8 +55,6 @@ export default function Home() {
     'Support 200+ users across multiple departments and locations with SLA-focused L1/L2 service delivery',
     'Delivered enterprise network, wireless, endpoint, SAP, telephony, and security-system support across Qatar sites',
     'Led endpoint security, hardware, email, IP telephony, ISP, and Wi-Fi infrastructure migrations',
-    'Achieved a 95% first-call resolution rate supporting 300+ users at NCC Group',
-    'Reduced average hardware repair turnaround time by 40% through process improvements',
     'Built and released FamZz POS, an independent Windows restaurant point-of-sale application',
   ];
 
@@ -111,10 +96,11 @@ export default function Home() {
   ];
 
   const skills = {
+    'End User Support': ['Microsoft 365', 'Outlook', 'Desktop/laptop troubleshooting', 'Remote & onsite support', 'Printers & scanners', 'User access', 'Incident escalation'],
     Networking: ['Cisco switches/routers', 'VLAN segmentation', 'DHCP/DHCP relay', 'STP', 'VTP', 'ACLs', 'TCP/IP', 'LAN/WAN', 'MAC-based access control'],
     Wireless: ['Cisco Meraki', 'Grandstream', 'Ruijie Reyee', 'Cloud-managed AP deployment', 'Wi-Fi monitoring'],
     'Systems & Endpoints': ['Active Directory', 'Group Policy', 'Windows Server', 'Windows 10/11', 'PXE', 'SCCM', 'Palo Alto Cortex XDR'],
-    'Business Applications': ['SAP Fiori', 'SAP SuccessFactors', 'SAP HANA', 'SAP BTP (in progress)', 'Zetalent', 'eZee Optimus POS'],
+    'Business Applications': ['SAP Fiori', 'SAP SuccessFactors', 'SAP HANA', 'Zetalent', 'eZee Optimus POS'],
     'Telephony & Security': ['IP telephony/IP-PBX', 'CCTV/NVR/DVR/IP cameras', 'FingerTec', 'ZKTeco biometrics'],
     'Operating Systems & Platforms': ['Windows 10/11', 'Windows Server', 'Linux', 'Ubuntu', 'PXE', 'SCCM'],
     'Development & AI': ['FamZz POS', 'Ollama local LLMs', 'GitHub', 'AI productivity tools'],
@@ -127,7 +113,6 @@ export default function Home() {
     { name: 'Artificial Intelligence: From Infrastructure to Applications', issuer: 'Huawei / Meeza Academy (February 2026)' },
     { name: 'CompTIA Cisco Networking Pro (V8) course', issuer: 'Computer Pride (July 2026)' },
     { name: 'CS50x: Introduction to Computer Science', issuer: 'Harvard University (2022)' },
-    { name: 'SAP BTP Administrator Course', issuer: 'In progress' },
   ];
 
   const languages = [
@@ -140,8 +125,8 @@ export default function Home() {
   const focusAreas = [
     {
       icon: Terminal,
-      title: 'Enterprise IT & Networks',
-      description: 'Cisco switching, VLANs, cloud-managed Wi-Fi, Active Directory, SCCM, SAP applications, IP telephony, CCTV, biometrics, and multi-site ISP coordination.',
+      title: 'End User Support & Networks',
+      description: 'L1/L2 support for 200+ users, Microsoft 365, Windows endpoints, Active Directory, Cisco switching, VLANs, Wi-Fi, SAP applications, IP telephony, and multi-site vendor coordination.',
     },
     {
       icon: Code2,
@@ -207,7 +192,7 @@ export default function Home() {
         <div className="container py-4 flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold text-primary">Fahmi Ahmed Ghazal</h1>
-            <p className="text-sm text-muted-foreground">IT Infrastructure Specialist | Windows App Developer | Local AI Practitioner</p>
+            <p className="text-sm text-muted-foreground">End User Support Engineer | IT Support & Networking</p>
           </div>
           <div className="flex gap-4">
             <button 
@@ -241,9 +226,9 @@ export default function Home() {
         <section className="mb-16 pb-8 border-b-2 border-accent/20">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <h2 className="text-4xl font-bold mb-4 text-primary">IT Infrastructure, Windows Applications & Local AI</h2>
+              <h2 className="text-4xl font-bold mb-4 text-primary">End User Support Engineer</h2>
               <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                CCNA-trained IT Support and Network Specialist with 10+ years of experience across Qatar and the UAE. I support enterprise users, networks, endpoints, SAP applications, IP telephony, and security systems while independently developing Windows applications such as FamZz POS. I also work with Linux, host open-source AI models offline using Ollama, and manage technology-focused social media channels.
+                CCNA-trained IT professional with 10+ years of IT support and networking experience across Qatar and the UAE. Based in Al Wukair, Qatar, I provide L1/L2 support for 200+ users across multiple Amwaj sites, covering Windows endpoints, Microsoft 365, Active Directory, LAN/WAN/Wi-Fi, printers, SAP applications, IP telephony, and CCTV. My experience includes incident handling, endpoint deployments, infrastructure migrations, and vendor coordination. I also independently develop Windows applications such as FamZz POS and explore Linux and local AI tools.
               </p>
               <div className="flex gap-4 flex-wrap">
                 <Button 
@@ -276,6 +261,7 @@ export default function Home() {
                   <div>
                     <p className="font-semibold">Location</p>
                     <p className="text-muted-foreground">Al Wukair, Qatar</p>
+                    <p className="text-muted-foreground mt-2">Qatar Light Vehicle Driving Licence — In progress</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
