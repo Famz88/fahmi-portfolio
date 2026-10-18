@@ -134,16 +134,16 @@ export default function Home() {
             <a className="pf-profile-link" href={profileUrl} download="Fahmi_Ahmed_Ghazal_Career_Profile.pdf"><FileText size={15}/> Download Career Profile <ArrowDown size={14}/></a>
             <div className="pf-hero-tools"><span>WINDOWS</span><i/><span>MICROSOFT 365</span><i/><span>CISCO</span><i/><span>LINUX</span></div>
           </div>
-          <div className="pf-portrait-area">
-            <div className="pf-orbit pf-orbit-one"/><div className="pf-orbit pf-orbit-two"/>
-            <div className="pf-portrait-card">
-              <div className="pf-photo-top"><span><span className="pf-status-dot"/> IT SUPPORT & NETWORKS</span><span>01 / FG</span></div>
-              <img src={`${base}images/fahmi-portrait.jpg`} width="1240" height="1536" alt="Fahmi Ahmed Ghazal" fetchPriority="high" className="pf-portrait"/>
-              <div className="pf-photo-caption"><div><strong>Fahmi Ahmed Ghazal</strong><span><MapPin size={13}/> Al Wukair, Qatar</span></div><a href="https://linkedin.com/in/fahmiahmedghazal/" target="_blank" rel="noreferrer" aria-label="Fahmi on LinkedIn"><Linkedin size={21}/></a></div>
+          <figure className="pf-profile">
+            <div className="pf-avatar">
+              <img src={`${base}images/fahmi-portrait.jpg`} width="1240" height="1536" alt="Fahmi Ahmed Ghazal" fetchPriority="high" className="pf-avatar-img"/>
             </div>
-            <div className="pf-floating-badge"><ShieldCheck size={25}/><div><strong>Support that makes a difference.</strong><span>People. Systems. Solutions.</span></div></div>
-            <span className="pf-portrait-note">HANDS-ON EXPERIENCE. HUMAN-FOCUSED SUPPORT.</span>
-          </div>
+            <figcaption className="pf-profile-caption">
+              <strong>Fahmi Ahmed Ghazal</strong>
+              <span>IT Support & Networking</span>
+              <p><MapPin size={13}/> Al Wukair, Qatar</p>
+            </figcaption>
+          </figure>
         </section>
 
         <div className="pf-wrap"><section className="pf-stats" aria-label="Career highlights">
