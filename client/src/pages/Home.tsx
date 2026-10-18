@@ -1,25 +1,17 @@
-import { Mail, Linkedin, Phone, MapPin, Download, ExternalLink, Github, Youtube, Send, Clock3, Bot, Code2, Terminal, Instagram, Facebook } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowUpRight, ArrowRight, ArrowDown, Mail, Linkedin, Phone, MapPin, Download, ExternalLink, Github, Youtube, Send, Bot, Code2, Terminal, Instagram, Facebook, Menu, X, Monitor, Network, ShieldCheck, GraduationCap, Check, Layers, ChevronRight, FileText, Wifi, Cpu } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { Link } from 'wouter';
+import './portfolio.css';
 
-/**
- * Modern Technical Minimalism Portfolio
- * Design: Clean, grid-based layout with cyan accents
- * Typography: IBM Plex Mono for headings, Inter for body
- * Color: Deep slate blue primary (#1e293b), Cyan accent (#06b6d4)
- * 
- * Contact Features:
- * - Download CV: Direct PDF download
- * - Contact Me: Opens email client
- * - Call: Direct phone link
- * - LinkedIn: Opens LinkedIn profile
- */
+const base = import.meta.env.BASE_URL;
+const cvUrl = `${base}FAHMI_AHMED_GHAZAL_Resume.pdf`;
+const profileUrl = `${base}Fahmi_Ahmed_Ghazal_Career_Profile.pdf`;
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
-  const [contactSent, setContactSent] = useState(false);
-
+  const [draftOpened, setDraftOpened] = useState(false);
+  const [skillView, setSkillView] = useState('All');
   const experiences = [
     {
       title: 'IT Technician — End User & IT Infrastructure Support',
@@ -38,6 +30,17 @@ export default function Home() {
       ],
     },
     {
+      title: 'IT Helpdesk Specialist',
+      company: 'NCC Group Limited',
+      location: 'Abu Dhabi, UAE',
+      period: 'June 2017 – May 2022',
+      highlights: [
+        'Delivered first-level support to 300+ users, achieving a 95% first-call resolution rate',
+        'Administered Active Directory and supported user onboarding and offboarding',
+        'Deployed workstations and maintained IT inventory and user documentation',
+      ],
+    },
+    {
       title: 'Hardware Technician',
       company: 'AMWAJ Catering Services Company Limited',
       location: 'Qatar',
@@ -48,50 +51,6 @@ export default function Home() {
         'Assembled and configured computer systems to specification',
         'Managed hardware components and replacement-part inventory',
       ],
-    },
-  ];
-
-  const keyAchievements = [
-    'Support 200+ users across multiple departments and locations with SLA-focused L1/L2 service delivery',
-    'Delivered enterprise network, wireless, endpoint, SAP, telephony, and security-system support across Qatar sites',
-    'Led endpoint security, hardware, email, IP telephony, ISP, and Wi-Fi infrastructure migrations',
-    'Built and released FamZz POS, an independent Windows restaurant point-of-sale application',
-  ];
-
-  const majorProjects = [
-    {
-      title: 'Enterprise Security Migration',
-      description: 'Executed large-scale migration of endpoint protection from Symantec to Palo Alto Cortex XDR across 200+ desktops and laptops, strengthening threat detection, response capability, and centralized security visibility',
-    },
-    {
-      title: 'Enterprise Endpoint Hardware Refresh',
-      description: 'Led a major Windows OS and SSD upgrade project across 200+ corporate desktops and laptops, significantly improving boot times, endpoint performance, and device reliability',
-    },
-    {
-      title: 'Enterprise Email Migration',
-      description: 'Led a major email platform migration from Microsoft 365 to Google Workspace across 200+ users, ensuring secure mailbox transfer, minimal downtime, user access continuity, and smooth staff adoption across the organization',
-    },
-    {
-      title: 'IP Telephony Migration',
-      description: 'Led relocation of IP telephony from Mesaieed Camp to Al Wukair offices, coordinated ISP IP-PBX installation and connectivity, and commissioned IP phones across multiple buildings',
-    },
-    {
-      title: 'Internet & ISP Coordination',
-      description: 'Coordinated Internet service installation across multiple locations, managing requirements, installation, testing, and service readiness with ISP partners',
-    },
-    {
-      title: 'Grandstream Wi-Fi Infrastructure',
-      description: 'Delivered end-to-end Wi-Fi deployments including access-point configuration, structured cabling and termination, SSID setup, connectivity testing, and monitoring',
-    },
-    {
-      title: 'FamZz POS – Windows Restaurant Point-of-Sale',
-      description: 'Developed and released a standalone Windows x64 POS for dine-in, takeaway, and delivery operations with kitchen tickets, back office, cash shifts, day-close reports, offline role-based data, encrypted backups, signed licensing, and SAP outbound queue integration. Verified v1.0.4 with 38 automated regression tests and dependency audits.',
-      link: 'https://famz88.github.io/famzz-pos-downloads/website',
-    },
-    {
-      title: 'FamZzTech1 – Technology Content',
-      description: 'Run a YouTube and Instagram technology channel covering gadgets, software, AI tools, and tutorials while administering additional TikTok and Facebook pages',
-      link: 'https://www.youtube.com/@famzztech1',
     },
   ];
 
@@ -122,24 +81,6 @@ export default function Home() {
     { lang: 'Hindi/Urdu', level: 'Conversational' },
   ];
 
-  const focusAreas = [
-    {
-      icon: Terminal,
-      title: 'End User Support & Networks',
-      description: 'L1/L2 support for 200+ users, Microsoft 365, Windows endpoints, Active Directory, Cisco switching, VLANs, Wi-Fi, SAP applications, IP telephony, and multi-site vendor coordination.',
-    },
-    {
-      icon: Code2,
-      title: 'Windows App Development',
-      description: 'Independent development of FamZz POS for Windows x64, including offline workflows, role-based access, encrypted backups, licensing, testing, and SAP queue integration.',
-    },
-    {
-      icon: Bot,
-      title: 'Local AI & Linux',
-      description: 'Linux-based technical workflows and offline hosting of open-source AI models with Ollama for private experimentation, productivity, research, and content creation.',
-    },
-  ];
-
   const socialLinks = [
     { label: 'FamZzTech1 on YouTube', href: 'https://youtube.com/@famzztech1', icon: Youtube },
     { label: 'FamZzTech1 on Instagram', href: 'https://www.instagram.com/famzztech1/', icon: Instagram },
@@ -150,452 +91,94 @@ export default function Home() {
     { label: 'Facebook page', href: 'https://www.facebook.com/share/1CePhLFEGB/', icon: Facebook },
   ];
 
-  const handleCallClick = () => {
-    window.location.href = 'tel:+97477698378';
-  };
 
-  const handleEmailClick = () => {
-    window.location.href = 'mailto:fahmyghazal@outlook.com?subject=Hello%20Fahmi&body=I%20would%20like%20to%20connect%20with%20you.';
-  };
-
-  const handleLinkedInClick = () => {
-    window.open('https://linkedin.com/in/fahmiahmedghazal/', '_blank', 'noopener,noreferrer');
-  };
-
+  const skillGroups = ['All', 'Support & systems', 'Infrastructure', 'Applications & AI'];
+  const visibleSkills = Object.entries(skills).filter(([name]) => {
+    if (skillView === 'All') return true;
+    if (skillView === 'Support & systems') return ['End User Support', 'Systems & Endpoints', 'Operating Systems & Platforms', 'Service Management'].includes(name);
+    if (skillView === 'Infrastructure') return ['Networking', 'Wireless', 'Telephony & Security'].includes(name);
+    return ['Business Applications', 'Development & AI'].includes(name);
+  });
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get('name') || '');
-    const email = String(formData.get('email') || '');
-    const availability = String(formData.get('availability') || 'Flexible');
-    const preferredTime = String(formData.get('preferredTime') || 'Not specified');
-    const message = String(formData.get('message') || '');
-    const subject = `Portfolio enquiry from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\nAvailability: ${availability}\nPreferred contact time: ${preferredTime}\n\n${message}`;
-    setContactSent(true);
-    window.location.href = `mailto:fahmyghazal@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const data = new FormData(event.currentTarget);
+    const subject = `Portfolio enquiry from ${String(data.get('name') || '')}`;
+    const message = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPreferred contact time: ${data.get('preferredTime') || 'Flexible'}\n\n${data.get('message')}`;
+    setDraftOpened(true);
+    window.location.href = `mailto:fahmyghazal@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
-        <div className="container py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-primary">Fahmi Ahmed Ghazal</h1>
-            <p className="text-sm text-muted-foreground">End User Support Engineer | IT Support & Networking</p>
-          </div>
-          <div className="flex gap-4">
-            <button 
-              onClick={handleEmailClick}
-              className="text-accent hover:text-accent/80 transition-colors p-2 hover:bg-secondary rounded-lg"
-              title="Send Email"
-            >
-              <Mail size={20} />
-            </button>
-            <button 
-              onClick={handleLinkedInClick}
-              className="text-accent hover:text-accent/80 transition-colors p-2 hover:bg-secondary rounded-lg"
-              title="Visit LinkedIn"
-            >
-              <Linkedin size={20} />
-            </button>
-            <button 
-              onClick={handleCallClick}
-              className="text-accent hover:text-accent/80 transition-colors p-2 hover:bg-secondary rounded-lg"
-              title="Call Now"
-            >
-              <Phone size={20} />
-            </button>
-          </div>
+    <div className="portfolio" id="top">
+      <a href="#main-content" className="pf-skip">Skip to content</a>
+      <header className="pf-header">
+        <div className="pf-wrap pf-nav">
+          <a href="#top" className="pf-brand" aria-label="Fahmi Ahmed Ghazal home"><span className="pf-monogram">fg<span>.</span></span><span>FAHMI GHAZAL<small>IT PROFESSIONAL · QATAR</small></span></a>
+          <nav className={menuOpen ? 'pf-links is-open' : 'pf-links'} aria-label="Main navigation">
+            {[['Work', '#work'], ['Experience', '#experience'], ['Expertise', '#expertise'], ['About', '#about']].map(([label, url]) => <a key={label} href={url} onClick={() => setMenuOpen(false)}>{label}</a>)}
+            <a href="#contact" className="pf-nav-contact" onClick={() => setMenuOpen(false)}>Let’s talk <ArrowUpRight size={16}/></a>
+          </nav>
+          <button className="pf-menu" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}>{menuOpen ? <X/> : <Menu/>}</button>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container py-12">
-        {/* Hero Section */}
-        <section className="mb-16 pb-8 border-b-2 border-accent/20">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="md:col-span-2">
-              <h2 className="text-4xl font-bold mb-4 text-primary">End User Support Engineer</h2>
-              <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                CCNA-trained IT professional with 10+ years of IT support and networking experience across Qatar and the UAE. Based in Al Wukair, Qatar, I provide L1/L2 support for 200+ users across multiple Amwaj sites, covering Windows endpoints, Microsoft 365, Active Directory, LAN/WAN/Wi-Fi, printers, SAP applications, IP telephony, and CCTV. My experience includes incident handling, endpoint deployments, infrastructure migrations, and vendor coordination. I also independently develop Windows applications such as FamZz POS and explore Linux and local AI tools.
-              </p>
-              <div className="flex gap-4 flex-wrap">
-                <Button
-                  asChild
-                  className="bg-accent text-accent-foreground hover:bg-accent/90"
-                >
-                  <a
-                    href={`${import.meta.env.BASE_URL}FAHMI_AHMED_GHAZAL_Resume.pdf`}
-                    download="Fahmi_Ahmed_Ghazal_CV.pdf"
-                  >
-                    <Download size={18} className="mr-2" />
-                    Download CV
-                  </a>
-                </Button>
-                <Button asChild variant="outline">
-                  <a
-                    href={`${import.meta.env.BASE_URL}Fahmi_Ahmed_Ghazal_Career_Profile.pdf`}
-                    download="Fahmi_Ahmed_Ghazal_Career_Profile.pdf"
-                  >
-                    <Download size={18} className="mr-2" />
-                    Download Career Profile
-                  </a>
-                </Button>
-                <Button 
-                  onClick={() => setShowContactForm(true)}
-                  variant="outline"
-                >
-                  Contact Form
-                </Button>
-                <Button 
-                  onClick={handleCallClick}
-                  variant="outline"
-                  className="text-accent border-accent hover:bg-accent/10"
-                >
-                  <Phone size={18} className="mr-2" />
-                  Call Now
-                </Button>
-              </div>
+      <main id="main-content">
+        <section className="pf-hero pf-wrap" aria-labelledby="hero-title">
+          <div className="pf-hero-copy">
+            <div className="pf-eyebrow"><span className="pf-status-dot"/> OPEN TO NEW OPPORTUNITIES <span className="pf-hero-location">/ QATAR</span></div>
+            <p className="pf-intro">Hello, I’m Fahmi Ahmed Ghazal.</p>
+            <h1 id="hero-title">Keeping people<br/><span>connected.</span></h1>
+            <p className="pf-role">End User Support Engineer <span>↗</span></p>
+            <p className="pf-description">I solve everyday IT challenges and support the infrastructure behind them. 10+ years of hands-on experience helping teams across Qatar and the UAE work with confidence.</p>
+            <div className="pf-actions"><a className="pf-button pf-button-primary" href={cvUrl} download="Fahmi_Ahmed_Ghazal_CV.pdf"><Download size={18}/> Download CV</a><a className="pf-button pf-button-outline" href="#contact">Let’s connect <ArrowUpRight size={18}/></a></div>
+            <a className="pf-profile-link" href={profileUrl} download="Fahmi_Ahmed_Ghazal_Career_Profile.pdf"><FileText size={15}/> Download Career Profile <ArrowDown size={14}/></a>
+            <div className="pf-hero-tools"><span>WINDOWS</span><i/><span>MICROSOFT 365</span><i/><span>CISCO</span><i/><span>LINUX</span></div>
+          </div>
+          <div className="pf-portrait-area">
+            <div className="pf-orbit pf-orbit-one"/><div className="pf-orbit pf-orbit-two"/>
+            <div className="pf-portrait-card">
+              <div className="pf-photo-top"><span><span className="pf-status-dot"/> IT SUPPORT & NETWORKS</span><span>01 / FG</span></div>
+              <img src={`${base}images/fahmi-portrait.jpg`} width="1240" height="1536" alt="Fahmi Ahmed Ghazal" fetchPriority="high" className="pf-portrait"/>
+              <div className="pf-photo-caption"><div><strong>Fahmi Ahmed Ghazal</strong><span><MapPin size={13}/> Al Wukair, Qatar</span></div><a href="https://linkedin.com/in/fahmiahmedghazal/" target="_blank" rel="noreferrer" aria-label="Fahmi on LinkedIn"><Linkedin size={21}/></a></div>
             </div>
-            <div className="bg-card border border-border rounded-lg p-6 h-fit">
-              <div className="space-y-3 text-sm">
-                <div className="flex items-start gap-3">
-                  <MapPin size={18} className="text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="text-muted-foreground">Al Wukair, Qatar</p>
-                    <p className="text-muted-foreground mt-2">Qatar Light Vehicle Driving Licence — In progress</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Phone size={18} className="text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <button 
-                      onClick={handleCallClick}
-                      className="text-accent hover:underline font-medium"
-                    >
-                      +974 77698378
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Mail size={18} className="text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <button 
-                      onClick={handleEmailClick}
-                      className="text-accent hover:underline font-medium break-all"
-                    >
-                      fahmyghazal@outlook.com
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 pt-2 border-t border-border">
-                  <Linkedin size={18} className="text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">LinkedIn</p>
-                    <button 
-                      onClick={handleLinkedInClick}
-                      className="text-accent hover:underline font-medium text-sm flex items-center gap-1"
-                    >
-                      View Profile <ExternalLink size={14} />
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 pt-2 border-t border-border">
-                  <Github size={18} className="text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold">GitHub</p>
-                    <a href="https://github.com/Famz88" target="_blank" rel="noreferrer" className="text-accent hover:underline font-medium text-sm flex items-center gap-1">
-                      github.com/Famz88 <ExternalLink size={14} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="pf-floating-badge"><ShieldCheck size={25}/><div><strong>Support that makes a difference.</strong><span>People. Systems. Solutions.</span></div></div>
+            <span className="pf-portrait-note">HANDS-ON EXPERIENCE. HUMAN-FOCUSED SUPPORT.</span>
           </div>
         </section>
 
-        {/* Key Achievements */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Key Achievements</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {keyAchievements.map((achievement, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-4 bg-card border border-border rounded-lg">
-                <span className="text-accent font-bold text-lg">✓</span>
-                <span className="text-sm">{achievement}</span>
-              </div>
-            ))}
+        <div className="pf-wrap"><section className="pf-stats" aria-label="Career highlights">
+          {[['10+', 'Years in IT support', 'Qatar & UAE'], ['200+', 'Users supported', 'Current role · AMWAJ'], ['200+', 'Endpoints migrated', 'Symantec → Cortex XDR'], ['95%', 'First-call resolution', 'Previous role · NCC']].map(([n,label,note]) => <div key={label}><strong>{n}</strong><div><span>{label}</span><small>{note}</small></div></div>)}
+        </section></div>
+
+        <section className="pf-section pf-wrap" id="work">
+          <div className="pf-section-head"><div><p className="pf-eyebrow">01 / SELECTED WORK</p><h2>Practical solutions.<br/><span>Real-world impact.</span></h2></div><p>A mix of enterprise IT delivery, independent development, and a curiosity for what comes next.</p></div>
+          <div className="pf-featured-grid">
+            <article className="pf-featured pf-pos-project">
+              <div className="pf-pos-visual" aria-hidden="true"><div className="pf-demo-top"><span className="pf-pos-logo">FZ<span>POS</span></span><span>RESTAURANT WORKSPACE</span><i/></div><div className="pf-demo-body"><div className="pf-demo-menu"><span className="active">Overview</span><span>Orders</span><span>Kitchen</span><span>Reports</span></div><div className="pf-demo-screen"><div className="pf-demo-heading">Everything in order.<span>One connected workspace.</span></div><div className="pf-demo-tiles"><div><Monitor/><span>Point of sale</span></div><div><Layers/><span>Back office</span></div><div><FileText/><span>Reports</span></div></div><div className="pf-demo-chart"><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><small>INTERFACE ILLUSTRATION</small></div></div></div>
+              <div className="pf-project-copy"><span className="pf-tag">INDEPENDENT DEVELOPMENT</span><h3>FamZz POS</h3><p>A restaurant point-of-sale project connecting ordering, kitchen tickets, staff workflows, and back-office reporting.</p><div className="pf-project-footer"><span>Product development · Restaurant technology</span><Link className="pf-round-link" href={`${base}projects/famzz-pos`} aria-label="Explore FamZz POS"><ArrowUpRight size={22}/></Link></div></div>
+            </article>
+            <article className="pf-featured pf-security-project"><div className="pf-security-visual" aria-hidden="true"><div className="pf-security-grid"/><div className="pf-shield-orbit"><ShieldCheck size={76} strokeWidth={1.2}/></div><span className="pf-system-label">ENDPOINT PROTECTION</span><div className="pf-security-flow"><span>Symantec</span><ArrowRight size={20}/><strong>Cortex XDR</strong></div><div className="pf-migration-count">200+<span>DESKTOPS & LAPTOPS</span></div></div><div className="pf-project-copy"><span className="pf-tag">ENTERPRISE IT</span><h3>A stronger security foundation.</h3><p>Migrated 200+ corporate endpoints from Symantec to Palo Alto Cortex XDR, supporting endpoint protection across the business.</p><div className="pf-project-footer"><span>Endpoint security · Migration delivery</span><a href="#experience" className="pf-round-link" aria-label="Read enterprise IT experience"><ArrowDown size={20}/></a></div></div></article>
+          </div>
+          <div className="pf-small-projects">
+            {[{icon:Monitor,title:'Endpoint refresh',text:'Windows OS and SSD upgrades across 200+ corporate computers.'},{icon:Mail,title:'Email platform migration',text:'Supported 200+ users moving from Microsoft 365 to Google Workspace.'},{icon:Wifi,title:'Connected workplaces',text:'Grandstream Wi-Fi deployment, IP telephony relocation, cabling, and ISP coordination.'}].map(({icon:Icon,title,text})=><article key={title}><Icon size={23}/><h3>{title}</h3><p>{text}</p></article>)}
           </div>
         </section>
 
-        {/* Professional Focus */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">What I Do</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {focusAreas.map(({ icon: Icon, title, description }) => (
-              <article key={title} className="bg-card border border-border rounded-lg p-6 hover:border-accent transition-colors">
-                <Icon className="text-accent mb-5" size={28} />
-                <h3 className="text-lg font-bold text-primary mb-3">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+        <section className="pf-experience-band" id="experience"><div className="pf-section pf-wrap pf-experience-layout"><div className="pf-experience-intro"><p className="pf-eyebrow">02 / THE JOURNEY</p><h2>Experience<br/>you can<br/><span>build on.</span></h2><p>From repairing hardware to supporting users and delivering infrastructure projects across multiple locations.</p><a href={cvUrl} download="Fahmi_Ahmed_Ghazal_CV.pdf" className="pf-text-link">Get the full CV <Download size={16}/></a></div><div className="pf-timeline">
+          {experiences.map((exp,idx)=><article className="pf-experience-item" key={exp.company}><span className={idx===0?'pf-timeline-dot current':'pf-timeline-dot'}/><div className="pf-experience-meta"><span>{exp.period}</span><span><MapPin size={12}/>{exp.location}</span></div><h3>{exp.company}</h3><p className="pf-job-title">{exp.title}</p><ul>{exp.highlights.slice(0,3).map(t=><li key={t}>{t}</li>)}</ul>{exp.highlights.length>3&&<details className="pf-more"><summary>More about this role <ChevronRight size={14}/></summary><ul>{exp.highlights.slice(3).map(t=><li key={t}>{t}</li>)}</ul></details>}</article>)}
+        </div></div></section>
 
-        {/* Professional Experience */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Professional Experience</h2>
-          <div className="space-y-6">
-            {experiences.map((exp, idx) => (
-              <div key={idx} className="experience-card">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
-                    <p className="text-accent font-semibold">{exp.company}</p>
-                  </div>
-                  <span className="text-sm text-muted-foreground bg-secondary px-3 py-1 rounded">
-                    {exp.period}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground mb-4">{exp.location}</p>
-                <ul className="space-y-2">
-                  {exp.highlights.map((highlight, hidx) => (
-                    <li key={hidx} className="flex gap-3 text-sm">
-                      <span className="text-accent font-bold mt-1">•</span>
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
+        <section className="pf-section pf-wrap" id="expertise"><div className="pf-section-head"><div><p className="pf-eyebrow">03 / TECHNICAL TOOLKIT</p><h2>The tools behind<br/><span>the solutions.</span></h2></div><p>Practical knowledge built through deployments, troubleshooting, and everyday support.</p></div><div className="pf-filter" role="group" aria-label="Filter technical expertise">{skillGroups.map(g=><button type="button" aria-pressed={skillView===g} className={skillView===g?'active':''} onClick={()=>setSkillView(g)} key={g}>{g}</button>)}</div><div className="pf-skills-grid">{visibleSkills.map(([name,list],i)=><article key={name}><span className="pf-skill-number">{String(i+1).padStart(2,'0')}</span><h3>{name}</h3><div className="pf-chips">{list.map(s=><span key={s}>{s}</span>)}</div></article>)}</div></section>
 
-        {/* Projects & Technical Content */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Projects & Technical Content</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {majorProjects.map((project, idx) => (
-              <div key={idx} className="bg-card border border-border rounded-lg p-6 hover:border-accent transition-colors">
-                <h3 className="text-lg font-bold text-primary mb-3">{project.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
-                {'link' in project && project.link && (
-                  <a href={project.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 mt-4 text-sm text-accent hover:underline">
-                    View project <ExternalLink size={14} />
-                  </a>
-                )}
-                {project.title.startsWith('FamZz POS') && (
-                  <div className="flex flex-wrap items-center gap-3 mt-4">
-                    <a href="https://famz88.github.io/famzz-pos-downloads/website/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
-                      Product website <ExternalLink size={14} />
-                    </a>
-                    <a href="https://famz88.github.io/famzz-pos-downloads/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
-                      Live demo <ExternalLink size={14} />
-                    </a>
-                    <Link href={`${import.meta.env.BASE_URL}projects/famzz-pos`} className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
-                      Case study <ExternalLink size={14} />
-                    </Link>
-                    <a href="https://github.com/Famz88/famzz-pos-downloads" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-accent hover:underline">
-                      <Github size={14} /> GitHub
-                    </a>
-                  </div>
-                )}
-                {project.title.startsWith('FamZzTech1') && (
-                  <a href="https://www.youtube.com/@famzztech1" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 mt-4 text-sm text-accent hover:underline">
-                    <Youtube size={14} /> YouTube channel
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
+        <section className="pf-wrap pf-about" id="about"><div className="pf-lab"><p className="pf-eyebrow">BEYOND THE HELP DESK</p><h2>Always learning.<br/><span>Always building.</span></h2><p>I’m an IT professional with a builder’s curiosity. Outside day-to-day support, I develop FamZz POS, work with Linux, and experiment with locally hosted AI models through Ollama.</p><div className="pf-lab-stack"><Terminal size={17}/> Linux <span>/</span> Ollama <span>/</span> GitHub <span>/</span> AI tools</div><a className="pf-text-link" href="https://github.com/Famz88" target="_blank" rel="noreferrer">Explore my GitHub <ArrowUpRight size={17}/></a><Cpu className="pf-lab-decoration" aria-hidden="true"/></div><div className="pf-qualifications"><p className="pf-eyebrow">EDUCATION & CONTINUOUS LEARNING</p><div className="pf-degree"><GraduationCap size={25}/><div><h3>BSc Information Technology</h3><p>Jomo Kenyatta University of Agriculture & Technology</p><span>2012 · Degree & transcripts attested for Qatar</span></div></div><div className="pf-cert-list">{certifications.map(c=><div key={c.name}><Check size={15}/><div><strong>{c.name}</strong><span>{c.issuer}</span></div></div>)}</div></div></section>
 
-        {/* Content & Social Operations */}
-        <section className="mb-16">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-primary border-l-4 border-accent pl-4">Technology Content & Social Operations</h2>
-              <p className="text-muted-foreground mt-3 max-w-3xl">I administer technology, AI, motivation, and educational pages across YouTube, Instagram, TikTok, and Facebook, covering content planning, publishing, tutorials, and audience-focused digital operations.</p>
-            </div>
-            <a href="https://github.com/Famz88" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-accent hover:underline text-sm"><Github size={17} /> View GitHub profile</a>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {socialLinks.map(({ label, href, icon: Icon }) => (
-              <a key={label} href={href} target="_blank" rel="noreferrer" className="flex items-center gap-3 p-4 bg-card border border-border rounded-lg hover:border-accent transition-colors">
-                <Icon className="text-accent flex-shrink-0" size={19} />
-                <span className="text-sm font-medium">{label}</span>
-                <ExternalLink className="ml-auto text-muted-foreground" size={14} />
-              </a>
-            ))}
-          </div>
-        </section>
+        <section className="pf-section pf-wrap pf-downloads" id="downloads"><div className="pf-section-head"><div><p className="pf-eyebrow">TAKE A CLOSER LOOK</p><h2>Choose your<br/><span>introduction.</span></h2></div><p>A detailed CV for your next shortlist. A visual career profile for a quick introduction.</p></div><div className="pf-download-grid"><a href={cvUrl} download="Fahmi_Ahmed_Ghazal_CV.pdf" className="pf-download-card"><div className="pf-document-preview"><img src={`${base}images/cv-preview.jpg`} loading="lazy" width="595" height="842" alt="Preview of the navy professional CV"/></div><div><span className="pf-tag">PDF · PROFESSIONAL CV</span><h3>The full picture.</h3><p>Experience, technical skills, qualifications, and key projects.</p><span className="pf-button pf-button-primary"><Download size={17}/> Download CV</span></div></a><a href={profileUrl} download="Fahmi_Ahmed_Ghazal_Career_Profile.pdf" className="pf-download-card"><div className="pf-document-preview"><img src={`${base}images/career-preview.jpg`} loading="lazy" width="1024" height="1536" alt="Preview of the Qatar career profile poster"/></div><div><span className="pf-tag">PDF · CAREER PROFILE</span><h3>A quick introduction.</h3><p>A visual overview of my background, expertise, and career goals.</p><span className="pf-button pf-button-outline"><Download size={17}/> Download Career Profile</span></div></a></div></section>
 
-        {/* AI & Linux Lab */}
-        <section className="mb-16">
-          <div className="bg-primary text-primary-foreground rounded-lg p-8 md:p-10 grid lg:grid-cols-[1.4fr_0.6fr] gap-8 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-4"><Bot className="text-accent" size={28} /><span className="text-sm uppercase tracking-[0.2em] text-accent font-semibold">Personal technical practice</span></div>
-              <h2 className="text-3xl font-bold mb-4">AI & Linux Lab</h2>
-              <p className="text-primary-foreground/80 leading-relaxed">I use Linux as part of my technical workflow and host open-source AI models locally with Ollama. This supports private, offline experimentation for productivity, research, automation, content creation, and technical problem-solving without depending entirely on cloud services.</p>
-            </div>
-            <div className="flex flex-col gap-3">
-              <a href="https://github.com/Famz88" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-md border border-primary-foreground/30 px-4 py-3 text-sm hover:bg-primary-foreground/10"><Github size={17} /> Developer profile</a>
-              <a href="https://youtube.com/@famzztech1" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-md border border-primary-foreground/30 px-4 py-3 text-sm hover:bg-primary-foreground/10"><Youtube size={17} /> AI and tech content</a>
-            </div>
-          </div>
-        </section>
-
-        {/* Skills Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Core Competencies</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {Object.entries(skills).map(([category, skillList]) => (
-              <div key={category} className="bg-card border border-border rounded-lg p-6">
-                <h3 className="text-lg font-bold text-primary mb-4">{category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skillList.map((skill, idx) => (
-                    <span key={idx} className="skill-badge">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Certifications */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Certifications</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {certifications.map((cert, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-4 bg-card border border-border rounded-lg">
-                <span className="text-accent font-bold text-lg">■</span>
-                <div>
-                  <p className="font-semibold text-sm">{cert.name}</p>
-                  <p className="text-xs text-muted-foreground">{cert.issuer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Education & Languages */}
-        <section className="mb-16 grid md:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Education</h2>
-            <div className="bg-card border border-border rounded-lg p-6">
-              <h3 className="text-lg font-bold text-primary mb-2">Bachelor of Science in Information Technology</h3>
-              <p className="text-accent font-semibold mb-1">Jomo Kenyatta University of Agriculture and Technology (JKUAT)</p>
-              <p className="text-sm text-muted-foreground">Graduated 2012</p>
-            </div>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold mb-8 text-primary border-l-4 border-accent pl-4">Languages</h2>
-            <div className="space-y-3">
-              {languages.map((lang, idx) => (
-                <div key={idx} className="flex justify-between items-center p-4 bg-card border border-border rounded-lg">
-                  <span className="font-semibold">{lang.lang}</span>
-                  <span className="text-accent font-bold">{lang.level}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Form */}
-        {showContactForm && (
-          <section id="contact-form" className="mb-16 scroll-mt-24">
-            <div className="bg-card border border-border rounded-lg p-6 md:p-8">
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <div>
-                  <h2 className="text-3xl font-bold text-primary">Start a conversation</h2>
-                  <p className="text-muted-foreground mt-2">Share a little context and your preferred timing. Your email app will open with the message ready to send.</p>
-                </div>
-                <Send className="text-accent flex-shrink-0" size={24} />
-              </div>
-              <form onSubmit={handleContactSubmit} className="grid md:grid-cols-2 gap-5">
-                <label className="space-y-2 text-sm font-medium">
-                  Your name
-                  <input name="name" required className="w-full rounded-md border border-border bg-background px-3 py-2 font-normal outline-none focus:ring-2 focus:ring-accent" placeholder="Your name" />
-                </label>
-                <label className="space-y-2 text-sm font-medium">
-                  Your email
-                  <input name="email" type="email" required className="w-full rounded-md border border-border bg-background px-3 py-2 font-normal outline-none focus:ring-2 focus:ring-accent" placeholder="you@example.com" />
-                </label>
-                <label className="space-y-2 text-sm font-medium">
-                  Availability
-                  <select name="availability" defaultValue="Flexible" className="w-full rounded-md border border-border bg-background px-3 py-2 font-normal outline-none focus:ring-2 focus:ring-accent">
-                    <option>Immediate</option>
-                    <option>This week</option>
-                    <option>Within two weeks</option>
-                    <option>Flexible</option>
-                  </select>
-                </label>
-                <label className="space-y-2 text-sm font-medium">
-                  Preferred contact time <span className="text-muted-foreground font-normal">(optional)</span>
-                  <input name="preferredTime" className="w-full rounded-md border border-border bg-background px-3 py-2 font-normal outline-none focus:ring-2 focus:ring-accent" placeholder="e.g. Qatar time, afternoons" />
-                </label>
-                <label className="space-y-2 text-sm font-medium md:col-span-2">
-                  Message
-                  <textarea name="message" required rows={5} className="w-full rounded-md border border-border bg-background px-3 py-2 font-normal outline-none focus:ring-2 focus:ring-accent" placeholder="Tell me about the role, project, or support you need." />
-                </label>
-                <div className="md:col-span-2 flex flex-wrap items-center gap-4">
-                  <Button type="submit" className="bg-accent text-accent-foreground hover:bg-accent/90"><Send size={17} className="mr-2" /> Open email draft</Button>
-                  <span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Clock3 size={16} /> Usually responds within one business day</span>
-                  {contactSent && <span className="text-sm text-accent">Email draft opened.</span>}
-                </div>
-              </form>
-            </div>
-          </section>
-        )}
-
-        {/* CTA Section */}
-        <section className="py-12 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-lg text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Collaborate?</h2>
-          <p className="text-lg mb-6 opacity-90">Let's discuss how I can support your IT infrastructure and team</p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button 
-              onClick={() => setShowContactForm(true)}
-              className="bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              Open Contact Form
-            </Button>
-            <Button 
-              onClick={handleLinkedInClick}
-              variant="outline" 
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-            >
-              View LinkedIn
-            </Button>
-            <Button 
-              onClick={handleCallClick}
-              variant="outline" 
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-            >
-              <Phone size={18} className="mr-2" />
-              Call Now
-            </Button>
-          </div>
-        </section>
+        <section className="pf-contact" id="contact"><div className="pf-wrap"><div className="pf-contact-top"><div><p className="pf-eyebrow"><span className="pf-status-dot"/> LET’S START A CONVERSATION</p><h2>Your next team member.<br/><span>Let’s make it happen.</span></h2></div><a className="pf-contact-arrow" href="mailto:fahmyghazal@outlook.com" aria-label="Email Fahmi"><ArrowUpRight size={50} strokeWidth={1.2}/></a></div><div className="pf-contact-links"><a href="mailto:fahmyghazal@outlook.com"><Mail size={20}/><span>EMAIL ME<strong>fahmyghazal@outlook.com</strong></span></a><a href="tel:+97477698378"><Phone size={20}/><span>GIVE ME A CALL<strong>+974 77698378</strong></span></a><div><MapPin size={20}/><span>BASED IN<strong>Al Wukair, Qatar</strong></span></div></div><p className="pf-licence-note">Qatar light vehicle driving licence · In progress</p><div className="pf-contact-bottom"><div className="pf-language-list">{languages.map(l=><span key={l.lang}>{l.lang} <small>{l.level}</small></span>)}</div><button type="button" className="pf-text-link" onClick={()=>setShowContactForm(!showContactForm)} aria-expanded={showContactForm} aria-controls="pf-contact-form">{showContactForm?'Close contact form':'Prefer a contact form?'} {showContactForm?<X size={16}/>:<ArrowRight size={16}/>}</button></div>
+          {showContactForm&&<form className="pf-form" id="pf-contact-form" onSubmit={handleContactSubmit}><div className="pf-form-intro"><h3>Tell me what you have in mind.</h3><p>This opens a draft in your email app. Review it there and send when ready.</p></div><label>Your name<input name="name" autoComplete="name" required placeholder="Your name"/></label><label>Email address<input name="email" type="email" autoComplete="email" required placeholder="you@company.com"/></label><label className="pf-form-wide">Preferred contact time <small>(optional)</small><input name="preferredTime" placeholder="e.g. Afternoons, Qatar time"/></label><label className="pf-form-wide">Message<textarea name="message" rows={4} required placeholder="Tell me about the role or project."/></label><div className="pf-form-wide pf-form-submit"><button type="submit" className="pf-button pf-button-primary"><Send size={17}/> Open email draft</button>{draftOpened&&<span role="status">Please review and send the draft in your email app.</span>}</div></form>}
+        </div></section>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-border mt-16 py-8">
-        <div className="container text-center text-sm text-muted-foreground">
-          <p>© 2026 Fahmi Ahmed Ghazal. All rights reserved.</p>
-          <div className="mt-3 flex flex-wrap justify-center gap-4">
-            <a href="https://github.com/Famz88" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-accent hover:underline"><Github size={14} /> GitHub</a>
-            <a href="https://famz88.github.io/famzz-pos-downloads/website/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-accent hover:underline"><Code2 size={14} /> FamZz POS</a>
-            <a href="https://youtube.com/@famzztech1" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-accent hover:underline"><Youtube size={14} /> FamZzTech1</a>
-          </div>
-          <p className="mt-3">Built with React & Tailwind CSS</p>
-        </div>
-      </footer>
+      <footer className="pf-footer pf-wrap"><div><a href="#top" className="pf-monogram" aria-label="Back to top">fg<span>.</span></a><p>© {new Date().getFullYear()} Fahmi Ahmed Ghazal</p></div><div className="pf-socials"><a href="https://linkedin.com/in/fahmiahmedghazal/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={18}/></a><a href="https://github.com/Famz88" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={18}/></a>{socialLinks.map(({label,href,icon:Icon})=><a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} title={label}><Icon size={17}/></a>)}</div><a href="#top" className="pf-back-top">Back to top <ArrowUpRight size={14}/></a></footer>
     </div>
   );
 }
