@@ -150,15 +150,6 @@ export default function Home() {
     { label: 'Facebook page', href: 'https://www.facebook.com/share/1CePhLFEGB/', icon: Facebook },
   ];
 
-  const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = `${import.meta.env.BASE_URL}FAHMI_AHMED_GHAZAL_Resume.pdf`;
-    link.download = 'FAHMI_AHMED_GHAZAL_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   const handleCallClick = () => {
     window.location.href = 'tel:+97477698378';
   };
@@ -231,12 +222,26 @@ export default function Home() {
                 CCNA-trained IT professional with 10+ years of IT support and networking experience across Qatar and the UAE. Based in Al Wukair, Qatar, I provide L1/L2 support for 200+ users across multiple Amwaj sites, covering Windows endpoints, Microsoft 365, Active Directory, LAN/WAN/Wi-Fi, printers, SAP applications, IP telephony, and CCTV. My experience includes incident handling, endpoint deployments, infrastructure migrations, and vendor coordination. I also independently develop Windows applications such as FamZz POS and explore Linux and local AI tools.
               </p>
               <div className="flex gap-4 flex-wrap">
-                <Button 
-                  onClick={handleDownloadCV}
+                <Button
+                  asChild
                   className="bg-accent text-accent-foreground hover:bg-accent/90"
                 >
-                  <Download size={18} className="mr-2" />
-                  Download CV
+                  <a
+                    href={`${import.meta.env.BASE_URL}FAHMI_AHMED_GHAZAL_Resume.pdf`}
+                    download="Fahmi_Ahmed_Ghazal_CV.pdf"
+                  >
+                    <Download size={18} className="mr-2" />
+                    Download CV
+                  </a>
+                </Button>
+                <Button asChild variant="outline">
+                  <a
+                    href={`${import.meta.env.BASE_URL}Fahmi_Ahmed_Ghazal_Career_Profile.pdf`}
+                    download="Fahmi_Ahmed_Ghazal_Career_Profile.pdf"
+                  >
+                    <Download size={18} className="mr-2" />
+                    Download Career Profile
+                  </a>
                 </Button>
                 <Button 
                   onClick={() => setShowContactForm(true)}
